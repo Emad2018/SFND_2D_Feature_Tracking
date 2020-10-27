@@ -62,7 +62,10 @@ int main(int argc, const char *argv[])
         // push image into data frame buffer
         DataFrame frame;
         frame.cameraImg = imgGray;
-        dataBuffer.push_back(frame);
+        dataBuffer.insert(dataBuffer.begin(), frame);
+        if (dataBuffer.size() > dataBufferSize) {
+          dataBuffer.pop_back();
+        }
 
         //// EOF STUDENT ASSIGNMENT
         cout << "#1 : LOAD IMAGE INTO BUFFER done" << endl;
@@ -71,19 +74,21 @@ int main(int argc, const char *argv[])
 
         // extract 2D keypoints from current image
         vector<cv::KeyPoint> keypoints; // create empty feature list for current image
-        string detectorType = "SHITOMASI";
+        string detectorType = "HARRIS";
 
         //// STUDENT ASSIGNMENT
         //// TASK MP.2 -> add the following keypoint detectors in file matching2D.cpp and enable string-based selection based on detectorType
         //// -> HARRIS, FAST, BRISK, ORB, AKAZE, SIFT
 
-        if (detectorType.compare("SHITOMASI") == 0)
-        {
-            detKeypointsShiTomasi(keypoints, imgGray, false);
+        if (detectorType.compare("SHITOMASI") == 0) {
+        detKeypointsShiTomasi(keypoints, imgGray, false);
+        } else if (detectorType.compare("HARRIS") == 0) {
+          detKeypointsHarris(keypoints, imgGray, false);
         }
-        else
-        {
-            //...
+        /*else
+         */
+        else {
+          detKeypointsModern(keypoints, imgGray, detectorType, false);
         }
         //// EOF STUDENT ASSIGNMENT
 
@@ -93,15 +98,24 @@ int main(int argc, const char *argv[])
         // only keep keypoints on the preceding vehicle
         bool bFocusOnVehicle = true;
         cv::Rect vehicleRect(535, 180, 180, 150);
-        if (bFocusOnVehicle)
-        {
-            // ...
+        vector<cv::KeyPoint> car_keypoints;
+        if (bFocusOnVehicle) {
+          for (int index = 0; index < keypoints.size(); index++) {
+            if ((keypoints[index].pt.x >= vehicleRect.tl().x) &&
+                (keypoints[index].pt.y >= vehicleRect.tl().y) &&
+                (keypoints[index].pt.x <= vehicleRect.br().x) &&
+                (keypoints[index].pt.y <= vehicleRect.br().y)) {
+              car_keypoints.push_back(keypoints[index]);
+            }
+          }
+          keypoints.clear();
+          keypoints = car_keypoints;
         }
 
         //// EOF STUDENT ASSIGNMENT
 
         // optional : limit number of keypoints (helpful for debugging and learning)
-        bool bLimitKpts = false;
+        bool bLimitKpts = true;
         if (bLimitKpts)
         {
             int maxKeypoints = 50;
