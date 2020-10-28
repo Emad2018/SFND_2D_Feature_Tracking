@@ -32,3 +32,19 @@ See the classroom instruction and code comments for more details on each of thes
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./2D_feature_tracking`.
+
+## Project rubic points:
+
+1- Data Buffer :
+
+I have used verctor Insert method to push element from front and pop last element.
+
+2-Keypoints:
+Using opencv Lib. I have Implement many key points detector (HARRIS, FAST, BRISK, ORB, AKAZE, and SIFT detectors).
+I used the opencv docs.
+for focusing on the front car I have removed any key point outside the car box by comapring the points Indecies with car box coordenadas.
+
+3-Descriptors:
+Using opencv Lib. I have Implement many key points Descriptors (BRIEF, ORB, FREAK, AKAZE and SIFT Descriptors).
+I used the opencv docs.
+for the K-nearest Implementation : I have used what was made in the Lesson.
