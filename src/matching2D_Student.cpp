@@ -74,7 +74,7 @@ void descKeypoints(vector<cv::KeyPoint> &keypoints, cv::Mat &img, cv::Mat &descr
       extractor = cv::AKAZE::create();
     } else if (descriptorType.compare("SIFT") == 0) {
       
-        extractor = cv::xfeatures2d::SiftDescriptorExtractor::create();
+        //extractor = cv::xfeatures2d::SiftDescriptorExtractor::create();
         
     } else {
       std::cout << descriptorType
@@ -238,13 +238,14 @@ void detKeypointsModern(std::vector<cv::KeyPoint> &keypoints, cv::Mat &img,
     cout << "ORB detector with n= " << keypoints.size() << " keypoints in "
          << 1000 * t / 1.0 << " ms" << endl;
   } else if (detectorType.compare("SIFT") == 0) {
-   
+   /*
   detector = cv::xfeatures2d::SIFT::create();
   t = (double)cv::getTickCount();
   detector->detect(img, keypoints);
   t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
   cout << "SIFT detector with n= " << keypoints.size() << " keypoints in " <<
   1000 * t / 1.0 << " ms" << endl; 
+  */
   } else {
     std::cout << detectorType
               << " is a not valid keypoint detectors please select from ( "
