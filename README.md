@@ -39,17 +39,46 @@ See the classroom instruction and code comments for more details on each of thes
 
 1- Data Buffer :
 
-I have used verctor Insert method to push element from front and pop last element.
+I have used verctor Insert method to push element from back and pop first element(First Come First Serve) to optimize the data storage.
+<img src="images/1.png" width="820" height="248" />
+2-Keypoints detection:
 
-2-Keypoints:
+the first step is to get the Key points in the input Image so we can use those key points to find matches with the following images. 
 Using opencv Lib. I have Implement many key points detector (HARRIS, FAST, BRISK, ORB, AKAZE, and SIFT detectors).
-I used the opencv docs.
-for focusing on the front car I have removed any key point outside the car box by comapring the points Indecies with car box coordenadas.
+
+
+By expermentaion:
+* the Fast detector was the quickest in keypoint detection.
+* SIFT detector was the slowest
+
+<img src="images/2.png" width="820" height="248" />
+
+the output from this step will be like this:
+
+<img src="images/keypoints.png" width="820" height="248" />
+
+As our Interest is to get the Time to Collision so I focused on the front car by removing any key point outside the car 
+box by comapring the points Indecies with car box coordenadas.
+
+<img src="images/3.png" width="820" height="248" />
 
 3-Descriptors:
+
 Using opencv Lib. I have Implement many key points Descriptors (BRIEF, ORB, FREAK, AKAZE and SIFT Descriptors).
-I used the opencv docs.
-for the K-nearest Implementation : I have used what was made in the Lesson.
+By expermentaion:
+* the BRISK Descriptors was the quickest with FAST key points detector.
+* SIFT detector was the slowest with FAST key points detector.
+
+<img src="images/4.png" width="820" height="248" />
+
+
+After we get the Keypoint and It's Enviroment we step the matching by using the K-nearest or Nearest neighbor.
+
+<img src="images/5.png" width="820" height="248" />
+
+the out from matching step will be like that:
+
+<img src="images/6.png" width="820" height="248" />
 
 ##TEST Results:
 

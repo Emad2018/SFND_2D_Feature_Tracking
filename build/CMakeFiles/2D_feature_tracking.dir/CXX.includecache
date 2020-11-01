@@ -66,6 +66,12 @@ opencv2/features2d.hpp
 dataStructures.h
 /home/emad/repo/SFND_2D_Feature_Tracking/src/dataStructures.h
 
+/home/emad/repo/SFND_2D_Feature_Tracking/src/matching2D_Student.cpp
+numeric
+-
+matching2D.hpp
+/home/emad/repo/SFND_2D_Feature_Tracking/src/matching2D.hpp
+
 /usr/include/opencv4/opencv2/calib3d.hpp
 opencv2/core.hpp
 /usr/include/opencv4/opencv2/opencv2/core.hpp
